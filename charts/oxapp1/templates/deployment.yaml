@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.name }}
+spec:
+  minReadySeconds: 3
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: {{ .Values.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.name }}
+    spec:
+      containers:
+      - name: {{ .Values.name }}
+        image: {{ .Values.pods.webapp.image }}
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        env:
+        - name: RAILS_ENV
+          value: "production"
+        - name: RAILS_SECRET
+          value: "86d95e8b4321e9b831dbfa4bf617baa449b4ce734db60c90ce72a63fcd1307248d981e69ebf8b46e5bd564a7bb67bdc42ff8d0df0a10be07c80ff249ddad5157"
+        - name: RAILS_LOG_TO_STDOUT
+          value: "true"
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi

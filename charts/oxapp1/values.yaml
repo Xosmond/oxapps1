@@ -1,0 +1,10 @@
+replicaCount: 1
+name: oxapp1
+pods:
+  webapp:
+    image: xosmond/oxapps1
+    pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
