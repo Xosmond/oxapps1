@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oxapp1
+spec:
+  minReadySeconds: 3
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 60
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: oxapp1
+  template:
+    metadata:
+      labels:
+        app: oxapp1
+    spec:
+      containers:
+      - name: prometheus.io
+        image: xosmond/oxapp1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: http
+          containerPort: 3000
+          protocol: TCP
+        env:
+        - name: RAILS_ENV
+          value: "production"
+        - name: RAILS_SECRET
+          value: "86d95e8b4321e9b831dbfa4bf617baa449b4ce734db60c90ce72a63fcd1307248d981e69ebf8b46e5bd564a7bb67bdc42ff8d0df0a10be07c80ff249ddad5157"
