@@ -31,3 +31,10 @@ spec:
           value: "production"
         - name: RAILS_SECRET
           value: "86d95e8b4321e9b831dbfa4bf617baa449b4ce734db60c90ce72a63fcd1307248d981e69ebf8b46e5bd564a7bb67bdc42ff8d0df0a10be07c80ff249ddad5157"
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
