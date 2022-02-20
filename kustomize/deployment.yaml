@@ -19,7 +19,7 @@ spec:
         app: oxapp1
     spec:
       containers:
-      - name: prometheus.io
+      - name: oxapp1
         image: xosmond/oxapp1
         imagePullPolicy: IfNotPresent
         ports:
