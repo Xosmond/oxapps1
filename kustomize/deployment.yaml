@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: oxapp1
-        image: xosmond/oxapp1
+        image: xosmond/oxapps1
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
